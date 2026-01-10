@@ -4,28 +4,28 @@ using namespace std;
 int main()
 {
     int m, n; cin >> m >> n;
-    int nums1[m+n], nums2[n], nums3[m+2];
-    for(int i = 0; i < m+ n; i++) cin >> nums1[i];
-    for(int i = 0; i < n; i++) cin >> nums2[i];
-    int l = 0, r = 0;
-    for(int i = 0; i < m; i++)nums3[i] = nums1[i];
+    vector<int> nums1(m+n), nums2(n);
+    for(int k = 0; k < m+n; k++) cin >> nums1[k];
+    for(int k = 0; k < n; k++) cin >> nums2[k];
 
-    for(int i = 0; i < m+n; i++) {
+    int i = m-1;
+    int j = n-1;
+    int l = nums1.size()-1;
 
-        if(l == m) {
-            nums1[i] = nums2[r]; r++;
-        }
-        else if(r == n) {
-            nums1[i] = nums3[l]; l++;
-        }
-        else if(nums3[l] < nums2[r]) {
-            nums1[i] = nums3[l]; l++;
+    while(i >= 0 && j >= 0) {
+        if(nums1[i] > nums2[j]) {
+            nums1[l] = nums1[i]; i--; l--;
         }
         else {
-            nums1[i] = nums2[r]; r++;
+            nums1[l] = nums2[j]; j--;l--;
         }
 
     }
+
+    while(j >= 0) {
+        nums1[l] = nums2[j]; j--; l--;
+    }
+
 
     for(int i = 0; i < m+n; i++) {
         cout << nums1[i]<<' ';
