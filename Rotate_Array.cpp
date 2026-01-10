@@ -1,22 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+void Reverse(vector<int>&nums, int l, int r)
+{
+    while(l < r) {
+        swap(nums[l], nums[r]);
+        l++; r--;
+    }
+}
+
 int main()
 {
     int n, k; cin >> n;
-    vector<int>nums(n), ans(n);
+    vector<int>nums(n);
     for(int i = 0; i < n; i++) cin >> nums[i];
     cin >> k;
+    k = k % n;
 
-    int l = n - (k % n), r = 0;
+    Reverse(nums, 0, n-1);
+    Reverse(nums, 0, k -1);
+    Reverse(nums, k, n-1);
 
-    for(int i = l; i < n; i++){
-        ans[r] = nums[i]; r++;
-    }
-    for(int i = 0; i < l; i++) {
-        ans[r] = nums[i]; r++;
-    }
-
-    for(auto it: ans)cout << it <<' ';
+    for(auto it: nums)cout << it <<' ';
 
 }

@@ -8,17 +8,15 @@ int main()
     int nums[n+2];
     for(int i = 0; i < n; i++) cin >> nums[i];
 
-    map<int,int>mp;
+    int cnt = 0, candidate = 0;
 
-    for(int i = 0; i < n; i++)mp[nums[i]]++;
-    int mx = 0, val = -1;
-
-    for(auto it: mp) {
-        if(it.second > mx) {
-            mx = it.second;
-            val = it.first;
-        }
+    for(int i = 0; i < n; i++){
+        if(cnt == 0) candidate = nums[i];
+        if(nums[i] == candidate) cnt++;
+        else cnt--;
     }
-    cout << val <<'\n';
+    cout << candidate <<'\n';
+
+
 
 }

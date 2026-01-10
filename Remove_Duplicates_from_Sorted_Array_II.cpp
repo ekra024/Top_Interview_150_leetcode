@@ -8,16 +8,17 @@ int main()
     for(int i = 0; i < n; i++) cin >> nums[i];
 
 
-    int cnt = 1, l = 0;
-    map<int,int>mp;
+    int l = 1, cnt = 1;
 
-    for(int i = 0; i < n; i++) {
-        if(mp[nums[i]] > 1) {
-            continue;
-        }
-        mp[nums[i]]++;
-        nums[l]=nums[i];
-        l++;
+    for(int i = 0; i < n-1; i++) {
+       if(nums[i] == nums[i+1] && cnt < 2) {
+        cnt++;
+        nums[l] = nums[i]; l++;
+
+       }
+       else if(nums[i] != nums[i+1]) {
+        nums[l] = nums[i+1]; l++; cnt = 1;
+       }
     }
 
     cout << l <<'\n';

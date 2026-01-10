@@ -7,22 +7,18 @@ int main()
     int nums[n+2];
     for(int i = 0; i < n; i++) cin >> nums[i];
 
-    int l = 1, cnt = 0;
+    int l = 1;
 
-    for(int i = 1; i < n; i++) {
-        while(l<n && nums[l-1] == nums[l]) {
-            l++; cnt++;
-        }
-        if(l < n) {
-            nums[i] = nums[l];
+    for(int i = 0; i < n-1; i++) {
+        if(nums[i] != nums[i+1]) {
+            nums[l] = nums[i+1];
             l++;
+
         }
-        else break;
     }
 
-    int k = n - cnt;
-    for(int i = 0; i < k; i++)cout<< nums[i]<<' ';
-    cout << k <<'\n';
+    for(int i = 0; i < l; i++)cout<< nums[i]<<' ';
+    cout << l <<'\n';
 
 }
 
