@@ -3,25 +3,29 @@ using namespace std;
 
 int main()
 {
-    string s; cin >> s;
+    string s; getline(cin, s);
     bool isPalindrome = true;
     transform(s.begin(), s.end(), s.begin(), ::tolower);
-    string g = "";
-    for(int i = 0; i < s.size(); i++) {
-        if(s[i] >= 'a' && s[i] <='z' || s[i] >='0' && s[i] <='9') {
-            g += s[i];
-        }
-    }
 
-    int l = 0, r = g.size()-1;
+
+    int l = 0, r = s.size()-1;
 
     while(l <= r) {
-        if(g[l] != g[r]) {
+        if(!(s[l]>='a' && s[l]<='z'|| s[l]>='0' && s[l]<='9')) {
+
+            l++; continue;
+        }
+        else if(!(s[r]>='a' && s[r]<='z'|| s[r]>='0' && s[r]<='9')) {
+
+            r--; continue;
+        }
+        if(s[l] != s[r]) {
             isPalindrome = false; break;
         }
         else {
             l++; r--;
         }
+
     }
 
     cout << isPalindrome <<'\n';

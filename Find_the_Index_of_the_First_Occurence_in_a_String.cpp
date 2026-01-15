@@ -6,22 +6,14 @@ int main()
     string haystack, needle;
     cin >> haystack >> needle;
 
-    int cnt = 0, index = -1;
+    int index = -1;
+    int n = haystack.size(), m = needle.size();
 
-    for(int i = 0; i< haystack.size(); i++) {
-        int l = i;
-        for(int j = 0; j < needle.size(); j++) {
-            if(haystack[l] != needle[j]) {
-                break;
-            } else {
-                cnt++; l++;
-            }
-        }
-        if(cnt == needle.size()) {
+    for(int i = 0; i <= n-m; i++) {
+        int j = 0;
+        while(j < m && haystack[i+j]==needle[j]) j++;
+        if(j == m){
             index = i; break;
-        }
-        else {
-            cnt = 0;
         }
     }
 

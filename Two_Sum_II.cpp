@@ -7,31 +7,21 @@ int main()
     vector<int>numbers(n+1);
     for(int i = 1; i <= n; i++ ) cin>>numbers[i];
 
-    vector<int>ans;
+    int low = 1, high = n;
 
-    for(int i = 1; i <= n; i++) {
-        int num2 = target - numbers[i];
-        int low = 1, high = n;
-
-        while(low <= high) {
-            int mid = (low + high)/2;
-            if(numbers[mid] > num2) {
-                high = mid - 1;
-            }
-            else if(numbers[mid] < num2) {
-                low = mid + 1;
-            }
-            else {
-               ans.push_back(i);
-               ans.push_back(mid);
-               break;
-            }
+    while(low < high) {
+        int num = numbers[low] + numbers[high];
+        if(num == target) {
+            cout << numbers[low]<<' '<<numbers[high]<<'\n';
+            cout<<low <<' '<< high<<'\n';
+            return 0;
         }
-        if(ans.size()) break;
+        else if(num < target) low++;
+        else high--;
 
     }
 
-    for(auto it: ans)cout << it <<' ';
+
 
 }
 

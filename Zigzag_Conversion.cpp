@@ -6,44 +6,25 @@ int main()
     string s; cin >> s;
     int numRows; cin >> numRows;
 
+    if(numRows == 1) {
+        cout << s <<'\n';return 0;
+    }
     int n = s.size();
-    char arr[numRows+1][n+1];
-
-    for(int i = 0; i < numRows; i++) {
-        for(int j = 0; j < n; j++) {
-            arr[i][j] = '0';
-        }
-    }
-
-    bool ok = true;
-    int l = 0, r = 0;
-
-    for(int i = 0; i < n; i++) {
-        if(l <= 0) {
-            ok = true;
-            l = 0;
-        }
-        if(ok){
-            arr[l][r] = s[i];
-            l++;
-            if(l == numRows){
-                if(numRows)l-=2;
-                r++;
-                ok = false;
-            }
-        }
-        else {
-            arr[l][r] = s[i];
-            l--; r++;
-        }
-    }
+    vector<string>rows(numRows);
+    int cur = 0;
+    bool down = true;
     string ans="";
 
-     for(int i = 0; i < numRows; i++) {
-        for(int j = 0; j < n; j++) {
-            if(arr[i][j] != '0') ans +=arr[i][j];
-        }
+    for(int i = 0; i < n; i++) {
+        rows[cur] += s[i];
+        if(cur == 0)down = true;
+        else if(cur == numRows-1) down = false;
+        cur += down? 1:-1;
     }
+
+     for(auto &it: rows) {
+        ans += it;
+     }
 
     cout << ans <<'\n';
 }
