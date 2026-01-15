@@ -10,7 +10,7 @@ int main()
     }
 
     string s = strs[0];
-    int k = s.size(), cnt = 0, mx = 0;
+    int k = s.size();
     string ans ="";
 
     for(int i = 0; i < k; i++) {
