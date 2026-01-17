@@ -6,19 +6,23 @@ int main()
     string ransomNote, magazine;
     cin >> ransomNote >> magazine;
 
-    sort(ransomNote.begin(), ransomNote.end());
-    sort(magazine.begin(), magazine.end());
+    vector<int>first(26,0), second(26,0);
 
-    int l = 0, r = ransomNote.size();
-    bool ok = false;
-
+    for(int i = 0; i < ransomNote.size(); i++) {
+        first[ransomNote[i]-'a']++;
+    }
     for(int i = 0; i < magazine.size(); i++) {
-        if(ransomNote[l] == magazine[i]) l++;
-        if(l == r) {
-            ok = true; break;
+        second[magazine[i]-'a']++;
+    }
+
+    for(int i = 0; i < 26; i++) {
+        cout << first[i]<<' '<< second[i]<<'\n';
+        if(first[i] > second[i]) {
+            cout <<"False\n";
+            return 0;
         }
     }
 
-    cout << ok <<'\n';
+    cout << "True" <<'\n';
 
 }
