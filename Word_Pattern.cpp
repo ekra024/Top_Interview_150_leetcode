@@ -7,53 +7,37 @@ int main()
     char ch; cin >> ch;
 
     getline(cin, s);
-    vector<string>WordOfPattern;
-    map<string,int>cnt, mp2;
-    map<string,char>Replace;
-    map<char,int>mp1;
 
     string t ="";
     s = ch+s;
 
-    for(int i = 0; i < s.size(); i++) {
-        if(s[i] != ' ') t+=s[i];
-        else {
-           WordOfPattern.push_back(t);
-           t ="";
-        }
-    }
-    if(t.size())WordOfPattern.push_back(t);
-
+    int n = s.size();
+    unordered_map<string,char>mp1;
+    unordered_map<char,string>mp2;
     bool ok = true;
-
-    if(WordOfPattern.size() != pattern.size()){
-        ok = false;
-    }
-
-    for(int i = 0; i < pattern.size(); i++) {
-        mp1[pattern[i]]++;
-        mp2[WordOfPattern[i]]++;
-    }
-    if(mp1.size() != mp2.size()) {
-        ok = false;
-    }
 
     int l = 0;
 
-    for(auto it: WordOfPattern) {
-
-        if(cnt[it] > 0) {
-           if(Replace[it] != pattern[l]) {
+    for(int i = 0; i < n; i++) {
+        if(l >= pattern.size()){
             ok = false; break;
+        }
+        if(s[i] != ' ') t+=s[i];
+        if(i==n-1 || s[i]==' ') {
+           if(mp1.find(t)!=mp1.end() ||
+              mp2.find(pattern[l]) != mp2.end() ) {
+                if(mp1[t] != pattern[l] ||
+                   mp2[pattern[l]] != t )
+                    ok = false;
            }
+           mp1[t] = pattern[l];
+           mp2[pattern[l]] = t;
+           l++;
+           t ="";
         }
-        else {
-            cnt[it]++;
-            Replace[it] = pattern[l];
-        }
-        l++;
     }
 
+    if(l < pattern.size()) ok = false;
     cout << ok <<'\n';
 }
 
