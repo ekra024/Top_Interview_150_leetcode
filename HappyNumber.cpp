@@ -1,26 +1,32 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int squareSum(int n){
+    int sum = 0;
+    while(n){
+        int d = n % 10;
+        sum += d*d;
+        n /= 10;
+    }
+    return sum;
+}
+
 int main()
 {
     int n; cin >> n;
-    map<int,int>mp;
+
     bool ok = true;
+    int slow = n, fast = n;
 
-
-    while(n != 1) {
-        int temp = n;
-        int sum = 0;
-        while(temp > 0) {
-            int num = temp%10;
-            temp/=10;
-            sum += (num*num);
-        }
-        if(mp[n]) {
-            ok = false; break;
-        }
-        mp[n]++;
-        n = sum;
+    do{
+        slow = squareSum(slow);
+        fast = squareSum(squareSum(fast));
     }
+    while( slow != fast);
+
+    if(slow == 1) ok = true;
+    else ok = false;
+
     cout << ok <<'\n';
+
 }
