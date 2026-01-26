@@ -7,10 +7,9 @@ int main()
 
     int cntOne = 0;
 
-    while(n > 0) {
-        int mod = n % 2;
-        if(mod)cntOne++;
-        n /= 2;
+    while(n) {
+        n = n & (n-1);
+        cntOne++;
     }
 
     cout << cntOne <<'\n';

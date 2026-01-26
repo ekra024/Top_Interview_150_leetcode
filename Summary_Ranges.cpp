@@ -8,24 +8,21 @@ int main()
     for(int i = 0; i < n; i++) cin >> nums[i];
 
     vector<string>range;
-
+    string s = "";
     for(int i = 0; i < n; i++) {
-        int temp = i;
-        if(temp+1 < n && nums[temp]+1 == nums[temp+1]) {
-            while(temp+1 < n && nums[temp]+1 == nums[temp+1])temp++;
-            string s1 = to_string(nums[i]);
-            string s2 = to_string(nums[temp]);
-            string s = "";
-            s += s1;
-            s += "->";
-            s += s2;
-            range.push_back(s);
-            i = temp;
+        int temp = nums[i], ed = nums[i];;
+
+        while(i+1 < n && nums[i]+1 == nums[i+1]){
+            i++; ed = nums[i];
+        }
+
+        if(temp != ed) {
+           range.push_back(to_string(temp)+"->"+to_string(ed));
         }
         else {
-            string s = to_string(nums[i]);
-            range.push_back(s);
+            range.push_back(to_string(temp));
         }
+
     }
 
     for(auto it: range)cout << it <<' ';
